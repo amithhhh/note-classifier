@@ -16,13 +16,15 @@ WebBrowser.maybeCompleteAuthSession();
 export default function HomeScreen() {
   const [userName, setUserName] = useState(null);
 
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    androidClientId: GOOGLE_CLIENT_ID,
-    scopes: ['profile', 'email'],
-    redirectUri: AuthSession.makeRedirectUri({
-      native: 'com.amith.currencyapp:/oauthredirect',
-    }),
-  });
+const [request, response, promptAsync] = Google.useAuthRequest({
+  androidClientId: GOOGLE_CLIENT_ID,
+  scopes: ['profile', 'email'],
+  redirectUri: AuthSession.makeRedirectUri({
+    scheme: 'currencyapp',
+    useProxy: false,
+  }),
+});
+
 
 
   useEffect(() => {
