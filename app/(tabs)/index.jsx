@@ -20,8 +20,9 @@ const [request, response, promptAsync] = Google.useAuthRequest({
   androidClientId: GOOGLE_CLIENT_ID,
   scopes: ['profile', 'email'],
   redirectUri: AuthSession.makeRedirectUri({
-    scheme: 'currencyapp',
+    native: 'currencyapp://oauthredirect',
     useProxy: false,
+    scopes: ['profile']
   }),
 });
 
