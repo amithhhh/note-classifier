@@ -13,18 +13,24 @@ import { Button, StyleSheet } from 'react-native';
 
 WebBrowser.maybeCompleteAuthSession();
 
+const discovery = {
+  authorizationEndpoint: 'https://accounts.google.com/o/oauth2/v2/auth',
+  tokenEndpoint: 'https://oauth2.googleapis.com/token',
+  revocationEndpoint: 'https://oauth2.googleapis.com/revoke',
+};
+
 export default function HomeScreen() {
   const [userName, setUserName] = useState(null);
 
 const [request, response, promptAsync] = Google.useAuthRequest({
-  androidClientId: GOOGLE_CLIENT_ID,
+  clientId: GOOGLE_CLIENT_ID,
   scopes: ['profile', 'email'],
   redirectUri: AuthSession.makeRedirectUri({
-    native: 'currencyapp://oauthredirect',
-    useProxy: false,
-    scopes: ['profile']
+    scheme: "currencyapp",
+    path: "oauthredirect"
   }),
-});
+  
+},discovery);
 
 
 
